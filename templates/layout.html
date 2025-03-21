@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/componentes.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Logo/Logo.jpeg') }}" type="image/x-icon">
+    <title>NETDROP - Nioy</title>
+</head>
+<body>
+    <div class="header">
+        <nav class="menu">
+            <li><a href="/">INICIO</a></li>
+            <li><a href="/qr">QR</a></li>
+            <li><a href="https://github.com/NioyJadelkaFp" target="_blank">GIT HUB</a></li>
+        </nav>
+        <div class="hr_barra"></div>
+    </div>
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

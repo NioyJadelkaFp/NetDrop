@@ -1,0 +1,74 @@
+.Generator-QR{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+}
+
+.Generator-QR img{
+    width: 100%;
+    height: 100%;
+}
+
+.Container{
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Boton_Url{
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 30px;
+    text-decoration: none;
+    margin: 0 auto;
+}
+
+.Text{
+    width: 30%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px){
+    .Container{
+        width: 100%;
+        height: 100%;
+    }
+
+    .Generator-QR{
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .Text{
+        width: 100%;
+    }
+
+    .Boton_Url{
+        width: 50%;
+    }    
+}
