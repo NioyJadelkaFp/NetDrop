@@ -1,6 +1,6 @@
 .Generator-QR{
     width: 100%;
-    height: 80vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: start;
@@ -10,11 +10,12 @@
 .Generator-QR img{
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
 .Container{
     width: 500px;
-    height: 500px;
+    height: 90%;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
     padding: 10px;
     border-radius: 10px;

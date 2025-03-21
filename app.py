@@ -1,14 +1,13 @@
-from email.mime import base
-from unittest import result
-from flask import Flask, redirect, render_template, send_file
-from scipy.__config__ import show
+from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
 import os
 
-Qr_Generator.Generar_QR()
+Files_Carpet = './static/File'
 
 app = Flask(__name__)
+
+Qr_Generator.Generar_QR()
 
 @app.route('/')
 def index():
@@ -21,7 +20,10 @@ def Descarga(File=''):
     Url_File = os.path.join(Base_Ruta, 'static/File', File)
     result = send_file(Url_File, as_attachment=True)
     return result
-    
+
+@app.route('/update')
+def UpDate():
+    return render_template('Up_Data.html')
 
 @app.route('/qrgenerator')
 def QR_Generador():
@@ -31,6 +33,14 @@ def QR_Generador():
 def qr():
     Qr_Generator.Generar_QR()
     return redirect('/qrgenerator')
+
+@app.route('/upload', methods=['POST'])
+def update():
+    file = request.files['file']
+    file.save(Files_Carpet + file.filename)
+    redirect('/update')
+    return 
+
 
 
 if __name__ == '__main__':
