@@ -3,7 +3,7 @@ from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
 import os
 
-Files_Carpet = './static/File'
+Files_Carpet = './static/File/'
 
 app = Flask(__name__)
 
@@ -36,10 +36,11 @@ def qr():
 
 @app.route('/upload', methods=['POST'])
 def update():
-    file = request.files['file']
-    file.save(Files_Carpet + file.filename)
-    redirect('/update')
-    return 
+    if request.method == 'POST':   
+        f = request.files['file'] 
+        f.save(Files_Carpet+ f.filename) 
+    return redirect('/update')
+
 
 
 
