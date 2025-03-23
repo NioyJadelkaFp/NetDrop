@@ -8,11 +8,15 @@
     width: 1px;
 }
 
+@view-transition{
+    navigation: auto;
+}
+
 main{
     width: 100%;
-    height: 100hv;
+    min-height: 80vh;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
 }

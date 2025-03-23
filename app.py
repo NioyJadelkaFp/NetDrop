@@ -2,6 +2,9 @@ from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
 import os
+import webbrowser
+import threading
+import socket as sok
 
 Files_Carpet = './static/File/'
 
@@ -41,8 +44,15 @@ def update():
         f.save(Files_Carpet+ f.filename) 
     return redirect('/update')
 
+def abrir_navegador():
+    # Obtenemos la dirección IP de la máquina
+    hostname = sok.gethostname()
+    Ip = sok.gethostbyname(hostname)
 
+    Urls = "http://" + Ip + ":5000/"
+    webbrowser.open(Urls)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    threading.Timer(1.5, abrir_navegador).start()  # Espera 1.5s y abre el navegador
+    app.run(host="0.0.0.0", port=5000, debug=False)

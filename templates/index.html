@@ -4,7 +4,7 @@
 <section class="List-Files">
     {% for File in File %}
         <div class="File">
-            <h1>{{ File.name }}</h1>
+            <span class="Texto">{{ File.name }}</span>
             <a href="/descarga/{{ File.name }}" >Descarga</a>
         </div>
    {% endfor %}
