@@ -15,3 +15,4 @@ def Generar_QR():
     img = New_QR.make_image(fill='black', back_color='white')
 
     img.save('./static/QR/Qr.png')
+

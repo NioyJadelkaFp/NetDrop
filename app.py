@@ -54,5 +54,6 @@ def abrir_navegador():
 
 
 if __name__ == '__main__':
-    threading.Timer(1.5, abrir_navegador).start()  # Espera 1.5s y abre el navegador
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    Qr_Generator.Generar_QR()
+    threading.Timer(1.5, abrir_navegador).start() 
+    app.run(host="0.0.0.0", port=5000, debug=True)
