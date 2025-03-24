@@ -4,8 +4,11 @@
 <section class="List-Files">
     {% for File in File %}
         <div class="File">
+            <picture>
+                <img class="Icono_Documento" src="{{url_for('static', filename='Logo/Arc.png')}}" alt="Icono de archivo">
+            </picture>
             <span class="Texto">{{ File.name }}</span>
-            <a href="/descarga/{{ File.name }}" >Descarga</a>
+            <a href="/descarga/{{ File.name }}" ><img class="Des" src="{{url_for('static', filename='Logo/descargar.png')}}" alt="Descargar icono">Descargar</a>
         </div>
    {% endfor %}
 </section>

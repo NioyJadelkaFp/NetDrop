@@ -1,9 +1,8 @@
 from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
-from Funciones import Show_File as Show_File
+#from Funciones import Show_File as Show_File
 import os
 import webbrowser
-import threading
 import socket as sok
 
 Files_Carpet = './static/File/'
@@ -15,7 +14,8 @@ Qr_Generator.Generar_QR()
 
 @app.route('/')
 def index():
-    File = Show_File.Show_File()
+    Ruta = './static/File'
+    File = os.scandir(Ruta)
     return render_template('index.html', File=File)
 
 @app.route('/descarga/<string:File>', methods=['GET', 'POST'])
@@ -54,7 +54,7 @@ def abrir_navegador():
     webbrowser.open(Urls)
 
 
-abrir_navegador()
+#abrir_navegador()
 
 if __name__ == '__main__':
     Qr_Generator.Generar_QR()
