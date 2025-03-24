@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 Qr_Generator.Generar_QR()
 
+
 @app.route('/')
 def index():
     File = Show_File.Show_File()
@@ -53,7 +54,8 @@ def abrir_navegador():
     webbrowser.open(Urls)
 
 
+abrir_navegador()
+
 if __name__ == '__main__':
     Qr_Generator.Generar_QR()
-    threading.Timer(1.5, abrir_navegador).start() 
     app.run(host="0.0.0.0", port=5000, debug=True)
