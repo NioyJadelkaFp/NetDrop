@@ -1,0 +1,40 @@
+# Archivos compilados de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Entornos virtuales
+venv/
+.env/
+.envrc
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de log y bases de datos
+*.log
+*.sqlite3
+*.db
+
+# Configuración de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de dependencias
+poetry.lock
+Pipfile.lock
+
+# Configuración de Docker y despliegue
+*.dockerfile
+*.envrc
+.env
+
+File/
+Qr/

@@ -1,16 +1,58 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 
 <section class="List-Files">
-    {% for File in File %}
-        <div class="File">
-            <picture>
-                <img class="Icono_Documento" src="{{url_for('static', filename='Logo/Arc.png')}}" alt="Icono de archivo">
-            </picture>
-            <span class="Texto">{{ File.name }}</span>
-            <a href="/descarga/{{ File.name }}" ><img class="Des" src="{{url_for('static', filename='Logo/descargar.png')}}" alt="Descargar icono">Descargar</a>
-        </div>
-   {% endfor %}
+  {% for File in File %}
+  <div class="File">
+    {% if File.tipo in ["jpg", "jpeg", "png", "gif"] %}
+    <picture>
+      <img 
+        class="Icono_Documento"
+        src="{{ File.ruta }}"
+        alt="{{ File.nombre }}"
+        width="150"
+      />
+    </picture>
+    {% elif File.tipo == "mp4" %}
+    <picture>
+        <video id="my-video" class="video-js" width="auto" height="auto">
+            <source src="{{ File.ruta }}" type="video/mp4">
+        </video>
+    </picture>
+
+    {% elif File.tipo in ["pfd", "rar", "zip"] %}
+    <picture>
+        <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
+    </picture>
+    {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
+    <picture>
+        <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Codigo">
+    </picture>
+    {% endif %}
+    <span class="Texto">{{ File.nombre }}</span>
+    <a href="/descarga/{{ File.nombre }}">
+      <img
+        class="Des"
+        src="{{ url_for('static', filename='Logo/descargar.png') }}"
+        alt="Descargar icono"
+      />
+      Descargar
+    </a>
+    <a class="Des" onclick="abrirDialogo()" style="pointer-events: none;
+    color: gray; /* Opcional: Cambia el color para indicar que está deshabilitado */
+    text-decoration: none;
+" >Ver</a>
+  </div>
+  {% endfor %}
 </section>
-   
+
+<script>
+  function abrirDialogo() {
+      document.getElementById("miDialogo").showModal();
+  }
+
+  function cerrarDialogo() {
+      document.getElementById("miDialogo").close();
+  }
+</script>
+
 {% endblock %}

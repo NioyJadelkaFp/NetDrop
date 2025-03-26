@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
-#from Funciones import Show_File as Show_File
+from Funciones import Show_File as Show_File
 import os
 import webbrowser
 import socket as sok
@@ -11,11 +11,9 @@ app = Flask(__name__)
 
 Qr_Generator.Generar_QR()
 
-
 @app.route('/')
 def index():
-    Ruta = './static/File'
-    File = os.scandir(Ruta)
+    File = Show_File.Show_File()
     return render_template('index.html', File=File)
 
 @app.route('/descarga/<string:File>', methods=['GET', 'POST'])
@@ -52,7 +50,6 @@ def abrir_navegador():
 
     Urls = "http://" + Ip + ":5000/"
     webbrowser.open(Urls)
-
 
 #abrir_navegador()
 
