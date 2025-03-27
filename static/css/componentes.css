@@ -1,27 +1,41 @@
-.Generator-QR{
+.Generator-QR {
     width: 100%;
     height: 70vh;
     display: flex;
     justify-content: center;
     align-items: start;
     gap: 20px;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
 }
 
-.Generator-QR img{
+.Generator-QR img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    animation: fadeIn 0.5s ease-out;
 }
 
-.Container{
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.Container {
     width: 450px;
     height: 90%;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 10px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
 }
 
-.Boton_Url{
+.Container:hover {
+    transform: translateY(-5px);
+}
+
+.Boton_Url {
     width: 200px;
     height: 50px;
     display: flex;
@@ -30,15 +44,21 @@
     background-color: #000000;
     color: #ffffff;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 10px;
     cursor: pointer;
     padding: 30px;
     text-decoration: none;
     margin: 0 auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.Text{
+.Boton_Url:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+
+.Text {
     width: 30%;
     height: 50px;
     display: flex;
@@ -46,142 +66,130 @@
     justify-content: center;
     align-items: start;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     margin-top: 20px;
+    color: #000000;
 }
 
-.List-Files{
+.List-Files {
     width: 100%;
     height: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     margin-bottom: 30px;
-
-    
+    gap: 50px;
 }
 
-.File{
-    width: 90%;
-    height: 100px;
+.File {
+    width: 500px;
+    height: 500px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     margin-top: 5px;
     border-radius: 10px;
     padding: 10px;
     background-color: #ffffff;
     color: #000000;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    transition: 0.5s;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
     gap: 10px;
-    border: grey solid 1px;
+    border: 1px solid #d3d3d3;
 }
 
-.File picture{
-    width: 300px;
-    height: 90px;
-    overflow: hidden;
+.File:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
 }
 
-dialog {
-    width: 400px;
-    height: 550px;
-    border: none;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    
-    /* 📌 Centrar en la pantalla */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;
-}
-
-dialog picture {
+.File picture {
     width: 90%;
-    height: 80%;
+    height: 70%;
+    overflow: hidden;
 }
-
-dialog button{
-    margin: 5px;
-}
-
 
 .File video {
     width: 100%;
     height: 100%;
-    display: block;  /* Cambié 'flex' a 'block' para evitar posibles problemas con el layout */
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-.File video::-webkit-media-controls-panel {
-    display: flex;
-    justify-content: center !important; /* Alinea los controles a la derecha */
+.File:hover video {
+    transform: scale(1.05);
 }
 
-.File video::-webkit-media-controls {
-    display: flex;
-    justify-content: center !important;
-}
-
-.Icono_Documento{
+.Icono_Documento {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.File .Texto{
+.File .Texto {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 90%;
     max-width: 90%;
     min-width: 25%;
     font-size: medium;
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     margin-left: 20px;
     color: #000000;
 }
 
-.File a{
+.File a {
     width: 200px;
     min-width: 100px;
-    max-width: 120px;
+    max-width: 200px;
     height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #f5f5f5;
+    color: #000000;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 10px;
     cursor: pointer;
     padding: 25px;
     text-decoration: none;
-    border: grey solid 1px;
+    border: 1px solid #d3d3d3;
     gap: 10px;
     margin-right: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.File .Des{
+.File a:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.File .Des {
     width: 15px;
     height: 15px;
 }
 
-.File h1{
+.File h1 {
     text-overflow: ellipsis;
     overflow: hidden;
-  white-space: nowrap;
-  font-size: 19px;
+    white-space: nowrap;
+    font-size: 19px;
+    color: #000000;
+    transition: color 0.3s ease;
 }
 
-.UpData{
+.File:hover h1 {
+    color: #666666;
+}
+
+.UpData {
     margin-top: 20vh;
     display: flex;
     justify-content: center;
@@ -192,21 +200,106 @@ dialog button{
     width: 600px;
     height: 300px;
     border-radius: 20px;
-    box-shadow: #000000 0px 0px 5px 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
 }
 
-.UpData .Up{
+.UpData:hover {
+    transform: translateY(-5px);
+}
+
+.UpData .Up {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #000000;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 5px;
     cursor: pointer;
     padding: 30px;
     text-decoration: none;
     margin: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.UpData .Up:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+
+.Message {
+    width: 90%;
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.Message li {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    font-size: 30px;
+    min-width: 30px;
+    padding: 20px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
+    margin-top: 50px;
+    color: #000000;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.Sends {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.Sends input {
+    width: 80%;
+    height: 30px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    padding: 5px;
+    transition: box-shadow 0.3s ease;
+}
+
+.Sends input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.Sends button {
+    height: 30px;
+    width: 10%;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Sends button:hover {
+    background-color: #333333;
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 768px){
@@ -243,7 +336,7 @@ dialog button{
 
     .File{
         width: 90%;
-        height: 100%;
+        height: 500px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -251,8 +344,8 @@ dialog button{
     }
 
     .File picture{
-        width: 500px;
-        height: 100px;
+        width: 90%;
+        height: 80%;
     }
 
     .File a{

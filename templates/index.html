@@ -14,7 +14,7 @@
     </picture>
     {% elif File.tipo == "mp4" %}
     <picture>
-        <video id="my-video" class="video-js" width="auto" height="auto">
+        <video id="my-video" class="video-js" width="auto" height="auto" controls>
             <source src="{{ File.ruta }}" type="video/mp4">
         </video>
     </picture>
@@ -37,22 +37,15 @@
       />
       Descargar
     </a>
-    <a class="Des" onclick="abrirDialogo()" style="pointer-events: none;
+    <!--
+      <a class="Des" onclick="abrirDialogo()" style="pointer-events: none;
     color: gray; /* Opcional: Cambia el color para indicar que está deshabilitado */
     text-decoration: none;
 " >Ver</a>
+    -->
   </div>
   {% endfor %}
 </section>
 
-<script>
-  function abrirDialogo() {
-      document.getElementById("miDialogo").showModal();
-  }
-
-  function cerrarDialogo() {
-      document.getElementById("miDialogo").close();
-  }
-</script>
 
 {% endblock %}

@@ -1,6 +1,8 @@
+from cv2 import broadcast
 from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
+from flask_socketio import SocketIO, send
 import os
 import webbrowser
 import socket as sok
@@ -8,6 +10,8 @@ import socket as sok
 Files_Carpet = './static/File/'
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret'
+socketio = SocketIO(app)
 
 Qr_Generator.Generar_QR()
 
@@ -16,12 +20,26 @@ def index():
     File = Show_File.Show_File()
     return render_template('index.html', File=File)
 
-@app.route('/descarga/<string:File>', methods=['GET', 'POST'])
+@app.route('/descarga/<string:File>', methods=['GET'])
 def Descarga(File=''):
-    Base_Ruta = os.path.dirname(__file__)
-    Url_File = os.path.join(Base_Ruta, 'static/File', File)
-    result = send_file(Url_File, as_attachment=True)
-    return result
+    try:
+        Base_Ruta = os.path.dirname(__file__)
+        Url_File = os.path.join(Base_Ruta, 'static/File', File)
+        
+        # Verificaciones de seguridad
+        if not os.path.exists(Url_File):
+            return "Archivo no encontrado", 404
+        
+        if not os.path.isfile(Url_File):
+            return "No es un archivo válido", 400
+        
+        # Enviar archivo para descarga
+        return send_file(Url_File, as_attachment=True, download_name=File)
+    
+    except Exception as e:
+        # Opcional: Loguear el error
+        print(f"Error al descargar archivo: {e}")
+        return "Error al procesar la descarga", 500
 
 @app.route('/update')
 def UpDate():
@@ -53,6 +71,15 @@ def abrir_navegador():
 
 #abrir_navegador()
 
+@app.route('/chat')
+def chat():
+    return render_template('Chat.html')
+
+@socketio.on('message')
+def Message(msg):
+    print('message' + msg)
+    send(msg, broadcast = True)
+
 if __name__ == '__main__':
     Qr_Generator.Generar_QR()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app,host="0.0.0.0", port=5000, debug=True )
