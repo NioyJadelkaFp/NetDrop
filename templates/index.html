@@ -20,7 +20,7 @@
     </picture>
     {% elif File.tipo in ["aac", "wav", "mp4","flac","ogg","aiff"] %}
     <picture>
-      <audio src="{{ File.ruta }}" controls></audio>
+      <audio src="{{ File.ruta }}" controls>
     </picture>
     {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
     <picture>
