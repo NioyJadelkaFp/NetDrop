@@ -1,4 +1,3 @@
-from cv2 import broadcast
 from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
@@ -87,4 +86,4 @@ def Message(msg):
 
 if __name__ == '__main__':
     Qr_Generator.Generar_QR()
-    socketio.run(app,host="0.0.0.0", port=5000, debug=True )
+    socketio.run(app)

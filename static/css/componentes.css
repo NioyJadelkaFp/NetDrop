@@ -227,9 +227,6 @@
     text-align: center;
 }
 
-.UpInput {
-    display: none; /* Ocultar el input de tipo file */
-}
 
 .Up:hover {
     background-color: #555555; /* Gris más claro */

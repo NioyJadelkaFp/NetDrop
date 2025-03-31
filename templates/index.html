@@ -18,6 +18,10 @@
     <picture>
       <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
     </picture>
+    {% elif File.tipo in ["aac", "wav", "mp4","flac","ogg","aiff"] %}
+    <picture>
+      <audio src="{{ File.ruta }}"></audio>
+    </picture>
     {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
     <picture>
       <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Código">
@@ -26,21 +30,8 @@
     <span class="Texto">{{ File.nombre }}</span>
 
     <a href="#" onclick="downloadFile('{{ File.nombre }}')">
-      <img class="Des" src="{{ url_for('static', filename='Logo/descargar.png') }}" alt="Descargar icono" />
-      Descargar
+        Descargar
     </a>
-
-    <a href="{{ File.ruta }}">
-      <img class="Des" src="{{ url_for('static', filename='Logo/descargar.png') }}" alt="Descargar icono" />
-      Ver archivo
-  </a>
-  
-    <!--
-      <a class="Des" onclick="abrirDialogo()" style="pointer-events: none;
-    color: gray; /* Opcional: Cambia el color para indicar que está deshabilitado */
-    text-decoration: none;
-" >Ver</a>
-    -->
 
   </div>
   {% endfor %}
