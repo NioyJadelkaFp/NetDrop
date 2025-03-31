@@ -22,24 +22,29 @@ def index():
 
 @app.route('/descarga/<string:File>', methods=['GET'])
 def Descarga(File=''):
-    try:
-        Base_Ruta = os.path.dirname(__file__)
-        Url_File = os.path.join(Base_Ruta, 'static/File', File)
+    if request.method == 'GET':
+        try:
+            Base_Ruta = os.path.dirname(__file__)
+            Url_File = os.path.join(Base_Ruta, 'static/File', File)
+            
+            # Verificaciones de seguridad
+            if not os.path.exists(Url_File):
+                return "Archivo no encontrado", 404
+            
+            if not os.path.isfile(Url_File):
+                return "No es un archivo válido", 400
+            
+            # Enviar archivo para descarga
+            return send_file(Url_File, as_attachment=True, download_name=File)
         
-        # Verificaciones de seguridad
-        if not os.path.exists(Url_File):
-            return "Archivo no encontrado", 404
-        
-        if not os.path.isfile(Url_File):
-            return "No es un archivo válido", 400
-        
-        # Enviar archivo para descarga
-        return send_file(Url_File, as_attachment=True, download_name=File)
-    
-    except Exception as e:
-        # Opcional: Loguear el error
-        print(f"Error al descargar archivo: {e}")
-        return "Error al procesar la descarga", 500
+        except Exception as e:
+            # Loguear error
+            print(f"Error al descargar archivo: {e}")
+            return "Error al procesar la descarga", 500
+    else:
+        # Si no es GET, redirigir de vuelta a la página principal
+        return redirect('/')
+
 
 @app.route('/update')
 def UpDate():

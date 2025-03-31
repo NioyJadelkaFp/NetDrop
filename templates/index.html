@@ -1,51 +1,45 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
+{% block content %}
 
 <section class="List-Files">
   {% for File in File %}
   <div class="File">
     {% if File.tipo in ["jpg", "jpeg", "png", "gif"] %}
     <picture>
-      <img 
-        class="Icono_Documento"
-        src="{{ File.ruta }}"
-        alt="{{ File.nombre }}"
-        width="150"
-      />
+      <img class="Icono_Documento" src="{{ File.ruta }}" alt="{{ File.nombre }}" width="150" />
     </picture>
     {% elif File.tipo == "mp4" %}
     <picture>
-        <video id="my-video" class="video-js" width="auto" height="auto" controls>
-            <source src="{{ File.ruta }}" type="video/mp4">
-        </video>
+      <video id="my-video" class="video-js" width="auto" height="auto" controls>
+        <source src="{{ File.ruta }}" type="video/mp4">
+      </video>
     </picture>
-
-    {% elif File.tipo in ["pfd", "rar", "zip"] %}
+    {% elif File.tipo in ["pdf", "rar", "zip"] %}
     <picture>
-        <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
+      <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
     </picture>
     {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
     <picture>
-        <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Codigo">
+      <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Código">
     </picture>
     {% endif %}
     <span class="Texto">{{ File.nombre }}</span>
-    <a href="/descarga/{{ File.nombre }}">
-      <img
-        class="Des"
-        src="{{ url_for('static', filename='Logo/descargar.png') }}"
-        alt="Descargar icono"
-      />
+    <a href="#" onclick="downloadFile('{{ File.nombre }}')">
+      <img class="Des" src="{{ url_for('static', filename='Logo/descargar.png') }}" alt="Descargar icono" />
       Descargar
     </a>
-    <!--
-      <a class="Des" onclick="abrirDialogo()" style="pointer-events: none;
-    color: gray; /* Opcional: Cambia el color para indicar que está deshabilitado */
-    text-decoration: none;
-" >Ver</a>
-    -->
   </div>
   {% endfor %}
 </section>
 
+<script>
+  function downloadFile(fileName) {
+    // Evitar que la página recargue o ejecute la descarga sin que el usuario haga clic
+    event.preventDefault();
+    
+    // Realizar la descarga
+    window.location.href = '/descarga/' + fileName;
+  }
+</script>
 
 {% endblock %}

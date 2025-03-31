@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-    <form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
-        <input type="file" name="file" class="Up" required />   
-        <input class="Des" type ="submit" value="SUBIR"> 
-    </form>
+<form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
+    <label for="file" class="Up">
+        Selecciona un archivo
+        <input type="file" name="file" id="file" class="UpInput" required />
+    </label>
+    <input class="Des" type="submit" value="SUBIR" />
+</form>
+
 {% endblock %}
