@@ -298,12 +298,13 @@
 }
 
 .Sends input {
-    width: 80%;
-    height: 30px;
+    width: 70%;
+    height: 60px;
     border: 1px solid #d3d3d3;
     border-radius: 5px;
     padding: 5px;
     transition: box-shadow 0.3s ease;
+    font-size: 30px;
 }
 
 .Sends input:focus {
@@ -312,8 +313,8 @@
 }
 
 .Sends button {
-    height: 30px;
-    width: 10%;
+    height: 60px;
+    width: 20%;
     background-color: #000000;
     color: #ffffff;
     border: none;
