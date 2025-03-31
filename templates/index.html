@@ -24,12 +24,12 @@
     </picture>
     {% endif %}
     <span class="Texto">{{ File.nombre }}</span>
-<<<<<<< Updated upstream
+
     <a href="#" onclick="downloadFile('{{ File.nombre }}')">
       <img class="Des" src="{{ url_for('static', filename='Logo/descargar.png') }}" alt="Descargar icono" />
       Descargar
     </a>
-=======
+
     <a href="{{ File.ruta }}">
       <img class="Des" src="{{ url_for('static', filename='Logo/descargar.png') }}" alt="Descargar icono" />
       Ver archivo
@@ -41,7 +41,7 @@
     text-decoration: none;
 " >Ver</a>
     -->
->>>>>>> Stashed changes
+
   </div>
   {% endfor %}
 </section>
