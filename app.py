@@ -37,7 +37,6 @@ def Descarga(File=''):
             # Enviar archivo para descarga
             return send_file(Url_File, as_attachment=True, download_name=File)
         
-<<<<<<< Updated upstream
         except Exception as e:
             # Loguear error
             print(f"Error al descargar archivo: {e}")
@@ -45,22 +44,6 @@ def Descarga(File=''):
     else:
         # Si no es GET, redirigir de vuelta a la página principal
         return redirect('/')
-
-=======
-        # Verificaciones de seguridad
-        if not os.path.exists(Url_File):
-            return "Archivo no encontrado", 404
-        
-        if not os.path.isfile(Url_File):
-            return "No es un archivo válido", 400
-        
-        # Enviar archivo sin forzar la descarga
-        return send_file(Url_File, mimetype="application/octet-stream")  # O el tipo adecuado para el archivo
-    
-    except Exception as e:
-        print(f"Error al procesar la descarga: {e}")
-        return "Error al procesar la descarga", 500
->>>>>>> Stashed changes
 
 
 @app.route('/update')
@@ -99,6 +82,7 @@ def chat():
 
 @socketio.on('message')
 def Message(msg):
+    print('message' + msg)
     send(msg, broadcast = True)
 
 if __name__ == '__main__':
