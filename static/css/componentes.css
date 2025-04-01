@@ -5,8 +5,7 @@
     justify-content: center;
     align-items: start;
     gap: 20px;
-    background-color: #f5f5f5;
-    transition: background-color 0.3s ease;
+    background-color: #ffffff;
 }
 
 .Generator-QR img {
@@ -17,22 +16,17 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .Container {
     width: 450px;
     height: 90%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
     background-color: #ffffff;
-    transition: transform 0.3s ease;
-}
-
-.Container:hover {
-    transform: translateY(-5px);
 }
 
 .Boton_Url {
@@ -41,21 +35,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 20px;
+    background-color: #f5f5f5;
+    color: #333333;
+    font-size: 16px;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 30px;
+    padding: 20px;
     text-decoration: none;
     margin: 0 auto;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #e0e0e0;
 }
 
 .Boton_Url:hover {
-    background-color: #333333;
-    transform: scale(1.05);
+    background-color: #eeeeee;
 }
 
 .Text {
@@ -65,10 +58,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     margin-top: 20px;
-    color: #000000;
+    color: #333333;
 }
 
 .List-Files {
@@ -80,7 +73,7 @@
     align-items: center;
     flex-direction: row;
     margin-bottom: 30px;
-    gap: 50px;
+    gap: 30px;
 }
 
 .File {
@@ -91,39 +84,30 @@
     align-items: center;
     flex-direction: column;
     margin-top: 5px;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 10px;
     background-color: #ffffff;
-    color: #000000;
-    font-size: 20px;
+    color: #333333;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
     gap: 10px;
-    border: 1px solid #d3d3d3;
-}
-
-.File:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-10px);
+    border: 1px solid #e0e0e0;
 }
 
 .File picture {
     width: 90%;
-    height: 70%;
+    height: 60%;
     overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
 }
 
 .File video {
     width: 100%;
     height: 100%;
     display: block;
-    transition: transform 0.3s ease;
-}
-
-.File:hover video {
-    transform: scale(1.05);
 }
 
 .Icono_Documento {
@@ -139,9 +123,9 @@
     max-width: 90%;
     min-width: 25%;
     font-size: medium;
-    font-family: 'Inter', sans-serif;
+    font-family: sans-serif;
     margin-left: 20px;
-    color: #000000;
+    color: #333333;
 }
 
 .File a {
@@ -153,22 +137,20 @@
     justify-content: center;
     align-items: center;
     background-color: #f5f5f5;
-    color: #000000;
-    font-size: 20px;
+    color: #333333;
+    font-size: 16px;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 4px;
     cursor: pointer;
     padding: 25px;
     text-decoration: none;
-    border: 1px solid #d3d3d3;
     gap: 10px;
     margin-right: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #e0e0e0;
 }
 
 .File a:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.05);
+    background-color: #eeeeee;
 }
 
 .File .Des {
@@ -180,13 +162,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 19px;
-    color: #000000;
-    transition: color 0.3s ease;
-}
-
-.File:hover h1 {
-    color: #666666;
+    font-size: 18px;
+    color: #333333;
 }
 
 .UpData {
@@ -199,57 +176,56 @@
     min-width: 300px;
     width: 100%;
     height: 300px;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff; /* Fondo blanco */
-    transition: transform 0.3s ease;
-    padding: 30px;
-}
-
-.UpData:hover {
-    transform: translateY(-5px);
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
 }
 
 .Up {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #333333; /* Fondo gris oscuro */
-    color: #ffffff;
+    background-color: #f5f5f5;
+    flex-direction: column;
+    color: #333333;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 15px 30px;
+    padding: 15px 20px;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
     margin-bottom: 15px;
     text-align: center;
+    border: 1px solid #e0e0e0;
 }
 
+.UpInput{
+    height: auto;
+    border-radius: 10px;
+    background-color: white;
+    padding: 30px;
+    margin-top: 10px;
+}
 
 .Up:hover {
-    background-color: #555555; /* Gris más claro */
-    transform: scale(1.05);
+    background-color: #eeeeee;
 }
 
 .Des {
-    background-color: #000000; /* Fondo negro */
-    color: #ffffff;
-    border: none;
+    background-color: #f5f5f5;
+    color: #333333;
+    border: 1px solid #e0e0e0;
     padding: 10px 20px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
 }
 
 .Des:hover {
-    background-color: #444444; /* Gris oscuro */
-    transform: scale(1.05);
+    background-color: #eeeeee;
 }
-
 
 .Message {
     width: 90%;
@@ -261,29 +237,18 @@
     display: flex;
     flex-direction: column;
     max-width: 90%;
-    font-size: 30px;
+    font-size: 18px;
     min-width: 30px;
     padding: 20px;
     list-style: none;
-    background-color: #f5f5f5;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 4px;
     overflow: hidden;
     word-wrap: break-word;
     white-space: normal;
-    margin-top: 50px;
-    color: #000000;
-    animation: slideIn 0.5s ease-out;
-}
-
-@keyframes slideIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    margin-top: 30px;
+    color: #333333;
+    border: 1px solid #e0e0e0;
 }
 
 .Sends {
@@ -296,33 +261,32 @@
 
 .Sends input {
     width: 70%;
-    height: 60px;
-    border: 1px solid #d3d3d3;
-    border-radius: 5px;
-    padding: 5px;
-    transition: box-shadow 0.3s ease;
-    font-size: 30px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #ffffff;
 }
 
 .Sends input:focus {
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-color: #d0d0d0;
 }
 
 .Sends button {
-    height: 60px;
+    height: 50px;
     width: 20%;
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
 }
 
 .Sends button:hover {
-    background-color: #333333;
-    transform: scale(1.1);
+    background-color: #eeeeee;
 }
 
 @media screen and (max-width: 768px){
@@ -382,8 +346,5 @@
     }
     .UpData input{
         font-size: 10px;
-        
     }
 }
-
-

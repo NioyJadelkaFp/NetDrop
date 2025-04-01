@@ -86,4 +86,4 @@ def Message(msg):
 
 if __name__ == '__main__':
     Qr_Generator.Generar_QR()
-    socketio.run(app)
+    socketio.run(app,host='0.0.0.0', debug=True)
