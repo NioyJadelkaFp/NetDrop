@@ -49,20 +49,21 @@ def Descarga(File=''):
 def UpDate():
     return render_template('Up_Data.html')
 
-@app.route('/qrgenerator')
-def QR_Generador():
-    return render_template('Qr_Generator.html')
-
-@app.route('/qr')
-def qr():
-    Qr_Generator.Generar_QR()
-    return redirect('/qrgenerator')
 
 @app.route('/upload', methods=['POST'])
 def update():
     if request.method == 'POST':   
-        f = request.files['file'] 
-        f.save(Files_Carpet+ f.filename) 
+        # Obtener el archivo y el título desde el formulario
+        f = request.files['file']
+        title = request.form['title']  # El título proporcionado en el formulario
+        
+        # Renombrar el archivo con el título y mantener su extensión original
+        file_extension = f.filename.split('.')[-1]  # Obtener la extensión del archivo
+        new_filename = f"{title}.{file_extension}"  # Renombrar el archivo
+        
+        # Guardar el archivo con el nuevo nombre
+        f.save(Files_Carpet + new_filename)
+        
     return redirect('/update')
 
 def abrir_navegador():

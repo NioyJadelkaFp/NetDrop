@@ -2,32 +2,6 @@
 {% block content %}
 
 
-    <section class="Message">
-        <ul id="message"></ul>
-    </section>
-
-    <form class="Sends">
-        <input type="text" id="mymessage"required>
-        <button type="submit" id="send" onclick="Send()">Enviar</button>
-    </form>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
-    <script>
-        const socket = io();
-        socket.on('message', function(msg){
-            $('#message').append('<li>' + msg + '</li>')
-        })
-
-        function Send(){
-            $('#mymessage').val();
-            socket.send($('#mymessage').val())
-            $('#mymessage').val('');
-        }
-
-
-
-    </script>
 
 
 {% endblock %}

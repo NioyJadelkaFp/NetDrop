@@ -1,11 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
+<h2>Sube tu archivo</h2>
 <form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
+    <label for="title" class="Up">
+        Título:
+        <input type="text" name="title" id="title" class="UpInput" required />
+    </label>
     <label for="file" class="Up">
         Selecciona un archivo
-        <input  type="file" name="file" id="file" class="UpInput" required />
+        <input type="file" name="file" id="file" class="UpInput" required />
     </label>
     <input class="Des" type="submit" value="SUBIR" />
 </form>
+
 
 {% endblock %}
