@@ -1,18 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     transition: all 0.3s;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
     width: 1px;
 }
 
-@view-transition{
+body {
+    background-color: #fafafa;
+    font-family: sans-serif;
+    color: #333333;
+}
+
+@view-transition {
     navigation: auto;
 }
 
-main{
+main {
     width: 100%;
     min-height: 80vh;
     display: flex;
@@ -21,15 +28,16 @@ main{
     flex-direction: column;
 }
 
-.header{
+.header {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.menu{
+.menu {
     width: 100%;
     height: 50px;
     display: flex;
@@ -38,33 +46,92 @@ main{
     padding: 0 20px;
 }
 
-.menu ul{
+.menu ul {
     display: flex;
     justify-content: end;
     width: 50%;
     list-style: none;
 }
 
-.menu li{
+.menu li {
     display: inline;
     list-style: none;
     margin: 10px;
 }
 
-.menu a{
+.menu a {
     width: 100%;
     height: 100%;
-    color: #000000;
+    color: #333333;
     text-decoration: none;
     margin: 0 10px;
-    font-size: 20px;
-    animation: aparecer;
-    animation-timeline: view(60% auto);
+    font-size: 16px;
 }
 
-.hr_barra{
+.menu a:hover {
+    color: #666666;
+}
+
+.Botones-grip {
+    width: 95%;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.Botones-grip button {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: transparent;
+}
+
+.Botones-grip button:hover {
+    background-color: #eeeeee;
+}
+
+.hr_barra {
     width: 90%;
     height: 1px;
-    background-color: #000000;
+    background-color: #e0e0e0;
     margin: 0 auto;
 }
+
+.footer {
+    color: #000000;
+    padding: 30px 0 20px;
+    font-family: Arial, sans-serif;
+    text-align: start;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #3498db;
+  }
+  
+  .tagline {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-bottom {
+    padding-top: 15px;
+    margin-top: 15px;
+    font-size: 14px;
+    margin-left: 20px;
+  }

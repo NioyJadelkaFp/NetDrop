@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<section class="List-Files">
+<section class="Botones-grip">
+  <button id="Columna" onclick="column()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <path fill-rule="evenodd" d="M2.625 6.75a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0A.75.75 0 0 1 8.25 6h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75ZM2.625 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0ZM7.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 7.5 12Zm-4.875 5.25a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+  </svg>
+  </button>
+<button id="wrap" onclick="wrap()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+    <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z" clipRule="evenodd" />
+  </svg>
+  </button>
+</section>
+
+<section class="List-Files" id="List-Files">
   {% for File in File %}
   <div class="File">
     {% if File.tipo in ["jpg", "jpeg", "png", "gif"] %}
@@ -45,6 +56,34 @@
     // Realizar la descarga
     window.location.href = '/descarga/' + fileName;
   }
+</script>
+
+<script>
+function column() {
+    let List = document.getElementById('List-Files');
+    let Button = document.getElementById('Columna');
+    let Button2 = document.getElementById('wrap');
+
+    Button.style.border = "1px solid #f0f0f0"; // Borde gris claro
+    Button2.style.border = "none"; // Quitar el borde del otro botón
+
+    List.style.flexDirection = "column";
+}
+
+function wrap() {
+    let List = document.getElementById('List-Files');
+    let Button = document.getElementById('wrap');
+    let Button1 = document.getElementById('Columna');
+
+    Button.style.border = "1px solid #f0f0f0"; // Borde gris claro
+    Button1.style.border = "none"; // Quitar el borde del otro botón
+
+    List.style.flexDirection = "row";
+    List.style.flexWrap = "wrap";
+}
+
+wrap()
+
 </script>
 
 {% endblock %}
