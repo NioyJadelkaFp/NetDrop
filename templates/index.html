@@ -29,9 +29,9 @@
     <picture>
       <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
     </picture>
-    {% elif File.tipo in ["aac", "wav", "mp4","flac","ogg","aiff"] %}
+    {% elif File.tipo in ["aac", "wav","flac","ogg","aiff","m4a"] %}
     <picture>
-      <audio src="{{ File.ruta }}" controls>
+      <iframe class="Icono_Documento" width="150" height="200" src="{{ File.ruta }}" ></iframe>
     </picture>
     {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav"] %}
     <picture>
@@ -89,6 +89,12 @@ function wrap() {
 wrap()
 
 </script>
+
+<script>
+  document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+  });
+  </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8169958814797444"
      crossorigin="anonymous"></script>
