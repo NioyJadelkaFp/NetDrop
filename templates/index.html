@@ -1,6 +1,67 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<style>
+  /* Fondo de la alerta */
+  #fondo-alerta {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+  }
+
+  /* Contenedor de la advertencia */
+  .contenedor-mensaje {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      font-family: Arial, sans-serif;
+  }
+
+  .boton-cerrar {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .boton-cerrar:hover {
+      background: #c9302c;
+  }
+</style>
+</head>
+<body>
+
+<!-- Alerta -->
+<div id="fondo-alerta">
+  <div class="contenedor-mensaje">
+      <p><strong>🚨 Advertencia 🚨</strong></p>
+      <p>No está permitido subir contenido sexual o sin el consentimiento de la persona.</p>
+      <p>Este sitio está siendo moderado en todo momento.</p>
+      <button class="boton-cerrar" id="cerrar-alerta">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  // Cerrar la alerta cuando se presiona el botón
+  document.getElementById("cerrar-alerta").addEventListener("click", function() {
+      document.getElementById("fondo-alerta").style.display = "none";
+  });
+</script>
+
 <section class="Botones-grip">
   <button id="Columna" onclick="column()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
     <path fill-rule="evenodd" d="M2.625 6.75a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0A.75.75 0 0 1 8.25 6h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75ZM2.625 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0ZM7.5 12a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12A.75.75 0 0 1 7.5 12Zm-4.875 5.25a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875 0a.75.75 0 0 1 .75-.75h12a.75.75 0 0 1 0 1.5h-12a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
