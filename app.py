@@ -63,7 +63,7 @@ def update():
 
 @app.route('/comunicados')
 def Comunicados():
-    with open('comunicados.json', 'r') as file:
+    with open('Comunicados.json', 'r') as file:
         comunicados = json.load(file)
     return render_template('Comunicados.html',comunicados=comunicados)
 
