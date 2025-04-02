@@ -1,8 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<section class="Comunicados">
 
+<section class="Comunicados">
+    <div class="Comunicados-container">
+        {% for comunicado in comunicados %}
+            <div class="Comunicados-card">
+                <div class="Comunicados-info">
+                    <span>{{ comunicado.titulo }}</span>
+                    <cite>{{ comunicado.autor }}</cite>
+                </div>
+                <p>{{ comunicado.texto }}</p>
+                <time datetime="{{ comunicado.fecha }}">{{ comunicado.fecha }}</time>
+            </div>
+        {% endfor %}
+    </div>
+    
 </section>
 
 {% endblock %}

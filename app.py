@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, send_file, request
 from Funciones import Show_File as Show_File
 from flask_socketio import SocketIO
 import os
+import json
 
 Files_Carpet = './static/File/'
 
@@ -62,7 +63,9 @@ def update():
 
 @app.route('/comunicados')
 def Comunicados():
-    return render_template('Comunicados.html')
+    with open('comunicados.json', 'r') as file:
+        comunicados = json.load(file)
+    return render_template('Comunicados.html',comunicados=comunicados)
 
 @app.errorhandler(404)
 def pagina_no_encontrada(error):

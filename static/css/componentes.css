@@ -468,5 +468,35 @@ input:focus {
 .Comunicados{
     width: 90%;
     height: 100vh;
-    margin: 0 auto;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Comunicados-card{
+    width: 100%;
+    height: auto;
+    min-height: 20vh;
+    max-height: 70vh;
+    border: 1px solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.Comunicados-info{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.Comunicados-card span{
+    font-size: 40px;
+}
+
+.Comunicados-card p{
+    font-size: small;
+    text-wrap: wrap;
 }

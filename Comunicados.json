@@ -1,0 +1,20 @@
+[
+    {
+        "titulo": "Nueva actualización",
+        "autor": "@Nioy - Developer",
+        "texto": "En esta actualización lanzamos este apartado para poder informar a nuestra comunica de nuevas Actualización, Reclamos ó personas nueva a nuestro equipo de desarrollo.",
+        "fecha": "2025-04-02"
+    },
+    {
+        "titulo": "Reclamos",
+        "autor": "@Admin - Support",
+        "texto": "Hemos recibido 1 reclamo po una foto de una persona que la subieron sin su consentimiento. \n por favor pedirle que no suban mas fotos de esa persona.",
+        "fecha": "2025-04-05"
+    },
+    {
+        "titulo": "Aviso",
+        "autor": "@Admin - Support",
+        "texto": "Nueva actualizaron de apartado de post para la comunidad y también un apartado de sugerencias para mejorar la web.",
+        "fecha": "2025-04-05"
+    }
+]
