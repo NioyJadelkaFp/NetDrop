@@ -33,9 +33,13 @@
     <picture>
       <audio src="{{ File.ruta }}" controls>
     </picture>
-    {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
+    {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav"] %}
     <picture>
       <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Código">
+    </picture>
+    {% elif File.tipo in ["exe"] %}
+    <picture>
+      <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/exe" width="150" height="200">
     </picture>
     {% endif %}
     <span class="Texto">{{ File.nombre }}</span>
