@@ -60,6 +60,10 @@ def update():
         
     return redirect('/update')
 
+@app.route('/comunicados')
+def Comunicados():
+    return render_template('Comunicados.html')
+
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
     return render_template('404.html')

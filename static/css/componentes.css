@@ -464,3 +464,9 @@ input:focus {
         #cerrar:hover {
             background: #cc0000;
         }
+
+.Comunicados{
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+}
