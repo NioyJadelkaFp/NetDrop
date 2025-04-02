@@ -17,7 +17,7 @@
   <div class="File">
     {% if File.tipo in ["jpg", "jpeg", "png", "gif"] %}
     <picture>
-      <img class="Icono_Documento" src="{{ File.ruta }}" alt="{{ File.nombre }}" width="150" />
+      <img class="Icono_Documento" src="{{ File.ruta }}" alt="{{ File.nombre }}" width="150" loading="lazy" />
     </picture>
     {% elif File.tipo == "mp4" %}
     <picture>
@@ -51,6 +51,24 @@
   </div>
   {% endfor %}
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let lazyImages = document.querySelectorAll("img.lazy");
+    let observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove("lazy");
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(img => observer.observe(img));
+  });
+</script>
 
 <script>
   function downloadFile(fileName) {
