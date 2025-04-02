@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div id="overlay">
+  <div id="alerta">
+      <p><strong>No me hago cargo de nada de lo que se sube.</strong></p>
+      <p><strong>Artículo 6 de la Constitución de El Salvador:</strong></p>
+      <p>“Toda persona puede expresar y difundir libremente sus pensamientos, siempre que no subvierta el orden público ni lesione la moral, el honor o la vida privada de los demás. El ejercicio de este derecho no estará sujeto a previa censura, sino a responsabilidades ulteriores establecidas por la ley.”</p>
+      <button id="cerrar">Aceptar</button>
+  </div>
+</div>
+
 <form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
     <label for="title" class="Up">
         Título:
@@ -12,6 +21,13 @@
     </label>
     <input class="Des" type="submit" value="SUBIR" />
 </form>
+
+<script>
+  // Cerrar la alerta cuando se presiona el botón
+  document.getElementById("cerrar").addEventListener("click", function() {
+      document.getElementById("overlay").style.display = "none";
+  });
+</script>
 
 <script>
     document.getElementById('uploadForm').onsubmit = function(event) {
