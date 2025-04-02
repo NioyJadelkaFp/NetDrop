@@ -1,18 +1,12 @@
 from flask import Flask, redirect, render_template, send_file, request
-from Funciones import Qr_Generator
 from Funciones import Show_File as Show_File
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO
 import os
-import webbrowser
-import socket as sok
 
 Files_Carpet = './static/File/'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
 socketio = SocketIO(app)
-
-Qr_Generator.Generar_QR()
 
 @app.route('/')
 def index():
@@ -66,27 +60,11 @@ def update():
         
     return redirect('/update')
 
-def abrir_navegador():
-    # Obtenemos la dirección IP de la máquina
-    hostname = sok.gethostname()
-    Ip = sok.gethostbyname(hostname)
-
-    Urls = "http://" + Ip + ":5000/"
-    webbrowser.open(Urls)
-
-#abrir_navegador()
-
-@app.route('/chat')
-def chat():
-    return render_template('Chat.html')
-
-@socketio.on('message')
-def Message(msg):
-    print('message' + msg)
-    send(msg, broadcast = True)
+@app.errorhandler(404)
+def pagina_no_encontrada(error):
+    return render_template('404.html')
 
 if __name__ == '__main__':
-    Qr_Generator.Generar_QR()
     socketio.run(app,host='0.0.0.0', debug=True)
 
     #,host='0.0.0.0', debug=True
