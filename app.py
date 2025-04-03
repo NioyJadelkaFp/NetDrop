@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 socketio = SocketIO(app)
 
+<<<<<<< Updated upstream
 
 REACTIONS_FILE = 'reactions.json'
 
@@ -48,6 +49,11 @@ def save_reactions(reactions_data):
 def save_user_reactions(user_reactions_data):
     with open(USER_REACTIONS_FILE, 'w') as f:
         json.dump(user_reactions_data, f)
+=======
+@app.route('/login')
+def Login():
+    return render_template('Login.html')
+>>>>>>> Stashed changes
 
 @app.route('/')
 def index():
@@ -194,5 +200,6 @@ def pagina_no_encontrada(error):
     return render_template('404.html')
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', debug=True)
+    socketio.run(app)
     # app.run(host='0.0.0.0', debug=True)
+    #,host='0.0.0.0', debug=TrueStashed changes
