@@ -16,7 +16,22 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/componentes.css') }}">
   <title>FREE - Comparte sin censura y sin restricciones</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">  +
+  <!-- Ícono de la web (favicon) -->
+<link rel="icon" href="{{ url_for('static', filename='Logo/Freec.png') }}" type="image/png">
+
+<!-- Metaetiquetas para redes sociales -->
+<meta property="og:image" content="{{ url_for('static', filename='Logo/Logo.png') }}">
+<meta property="og:image:alt" content="Logo de FREE">
+<meta property="twitter:image" content="{{ url_for('static', filename='Logo/Logo.png') }}">
+<meta property="twitter:image:alt" content="Logo de FREE">
+
+<!-- Imagen del banner al compartir la web -->
+<meta property="og:image" content="{{ url_for('static', filename='Logo/icono.png') }}">
+<meta property="og:image:alt" content="Banner de FREE">
+<meta name="twitter:image" content="{{ url_for('static', filename='Logo/icono.png') }}">
+<meta name="twitter:image:alt" content="Banner de FREE">
+
 </head>
 <body>
     <div class="header">
