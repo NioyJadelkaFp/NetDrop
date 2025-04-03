@@ -4,7 +4,6 @@
     border: 1px solid #e0e0e0;
     padding: 15px;
     border-radius: 8px;
-    background-color: #ffffff;
 }
 
 .Boton_Url {
@@ -254,7 +253,6 @@ input:focus {
     outline: none;
 }
 
-
 .Des {
     background-color: #f5f5f5;
     color: #333333;
@@ -325,43 +323,9 @@ input:focus {
     }
 }
 
-        /* Estilos para el fondo oscuro */
-        #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        /* Estilos para la alerta */
-        #alerta {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        #cerrar {
-            margin-top: 10px;
-            padding: 8px 15px;
-            background: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #cerrar:hover {
-            background: #cc0000;
-        }
+.Comunicados-container{
+    background-color: none;
+}
 
 .Comunicados{
     width: 90%;
