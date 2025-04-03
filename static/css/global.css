@@ -1,18 +1,16 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     transition: all 0.3s;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
 ::-webkit-scrollbar {
     width: 1px;
-}
-
-body {
-    background-color: #fafafa;
-    font-family: sans-serif;
-    color: #333333;
 }
 
 @view-transition {
@@ -22,6 +20,7 @@ body {
 main {
     width: 100%;
     min-height: 80vh;
+    height: auto;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -98,10 +97,10 @@ main {
 }
 
 .hr_barra {
-    width: 90%;
+    width: 100%;
     height: 1px;
     background-color: #e0e0e0;
-    margin: 0 auto;
+    margin-top: 100px;
 }
 
 .footer {
