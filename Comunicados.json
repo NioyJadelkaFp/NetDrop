@@ -1,20 +1,20 @@
 [
     {
-        "titulo": "Nueva actualización",
+        "titulo": "Nueva Actualización",
         "autor": "@Nioy - Developer",
-        "texto": "En esta actualización lanzamos este apartado para poder informar a nuestra comunica de nuevas Actualización, Reclamos ó personas nueva a nuestro equipo de desarrollo.",
+        "texto": "En esta actualización, presentamos un nuevo apartado diseñado para mantener informada a nuestra comunidad sobre actualizaciones, reclamos y la incorporación de nuevos miembros a nuestro equipo de desarrollo.",
         "fecha": "2025-04-02"
     },
     {
-        "titulo": "Reclamos",
+        "titulo": "Reporte de Contenido",
         "autor": "@Admin - Support",
-        "texto": "Hemos recibido 1 reclamo por una foto de una persona que la subieron sin su consentimiento. \n por favor pedirle que no suban mas fotos de esa persona.",
+        "texto": "Hemos recibido un reporte sobre la publicación de una fotografía sin el consentimiento de la persona afectada. Solicitamos a los usuarios que respeten la privacidad de los demás y se abstengan de compartir contenido sin autorización.",
         "fecha": "2025-04-05"
     },
     {
-        "titulo": "Aviso",
+        "titulo": "Aviso Importante",
         "autor": "@Admin - Support",
-        "texto": "Nueva actualizaron de apartado de post para la comunidad y también un apartado de sugerencias para mejorar la web.",
+        "texto": "Hemos implementado mejoras en la sección de publicaciones de la comunidad, así como un nuevo apartado de sugerencias para que los usuarios puedan contribuir con ideas para optimizar la plataforma.",
         "fecha": "2025-04-05"
     }
 ]
