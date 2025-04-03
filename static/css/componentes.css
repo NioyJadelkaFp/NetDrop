@@ -333,6 +333,7 @@ input:focus {
     margin: 20px auto;
     display: flex;
     flex-direction: column;
+    margin-bottom: 300px;
 
 }
 
