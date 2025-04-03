@@ -48,10 +48,35 @@
     {% endif %}
     <span class="Texto">{{ File.nombre }}</span>
 
-    <a href="#" onclick="downloadFile('{{ File.nombre }}')">
-        Descargar
-    </a>
-
+    <div class="file-actions">
+      <a href="#" onclick="downloadFile('{{ File.nombre }}')">
+          Descargar
+      </a>
+      
+      <!-- Reaction buttons with emojis -->
+      <div class="reaction-buttons">
+        <button class="reaction-btn like-btn {% if File.user_reaction == 'likes' %}active{% endif %}" 
+                onclick="reactToFile('{{ File.nombre }}', 'likes')">
+          <span class="emoji">👍</span>
+          <span class="like-count">{{ File.likes }}</span>
+        </button>
+        <button class="reaction-btn dislike-btn {% if File.user_reaction == 'dislikes' %}active{% endif %}" 
+                onclick="reactToFile('{{ File.nombre }}', 'dislikes')">
+          <span class="emoji">💩</span>
+          <span class="dislike-count">{{ File.dislikes }}</span>
+        </button>
+        <button class="reaction-btn love-btn {% if File.user_reaction == 'love' %}active{% endif %}" 
+                onclick="reactToFile('{{ File.nombre }}', 'love')">
+          <span class="emoji">❤️</span>
+          <span class="love-count">{{ File.love|default(0) }}</span>
+        </button>
+        <button class="reaction-btn laugh-btn {% if File.user_reaction == 'laugh' %}active{% endif %}" 
+                onclick="reactToFile('{{ File.nombre }}', 'laugh')">
+          <span class="emoji">😂</span>
+          <span class="laugh-count">{{ File.laugh|default(0) }}</span>
+        </button>
+      </div>
+    </div>
   </div>
   {% endfor %}
 </section>
@@ -82,6 +107,50 @@
     // Realizar la descarga
     window.location.href = '/descarga/' + fileName;
   }
+  
+  // Function to handle emoji reactions
+  function reactToFile(fileName, reaction) {
+    event.preventDefault();
+    
+    // Send the reaction to the server
+    fetch(`/react/${fileName}/${reaction}`, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Update the reaction counts on the page
+      const fileElement = event.target.closest('.File');
+      
+      // Update all reaction counts
+      const reactionTypes = ['likes', 'dislikes', 'love', 'laugh'];
+      reactionTypes.forEach(reactionType => {
+        const countElement = fileElement.querySelector(`.${reactionType}-count`);
+        if (countElement) {
+          countElement.textContent = data[reactionType];
+        }
+      });
+      
+      // Clear previous active states
+      const allButtons = fileElement.querySelectorAll('.reaction-btn');
+      allButtons.forEach(button => button.classList.remove('active'));
+      
+      // Add active state to current reaction if user has reacted
+      if (data.user_reaction) {
+        const activeButton = fileElement.querySelector(`.${data.user_reaction}-btn`);
+        if (activeButton) {
+          activeButton.classList.add('active');
+        }
+      }
+      
+      // Add a pulse animation
+      const button = event.target.closest('.reaction-btn');
+      button.classList.add('pulse-animation');
+      setTimeout(() => {
+        button.classList.remove('pulse-animation');
+      }, 500);
+    })
+    .catch(error => console.error('Error:', error));
+  }
 </script>
 
 <script>
@@ -108,18 +177,32 @@ function wrap() {
     List.style.flexWrap = "wrap";
 }
 
-wrap()
-
+wrap();
 </script>
 
 <script>
   document.addEventListener('contextmenu', function(event) {
       event.preventDefault();
   });
-  </script>
+</script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8169958814797444"
-     crossorigin="anonymous"></script>
+<style>
+  .reaction-btn.active {
+    border: 2px solid #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  
+  .pulse-animation {
+    animation: pulse 0.5s;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+</style>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8169958814797444"
      crossorigin="anonymous"></script>
 

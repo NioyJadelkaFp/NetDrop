@@ -369,3 +369,118 @@ input:focus {
     font-size: 25;
     text-wrap: wrap;
 }
+
+
+
+
+.file-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8px;
+    gap: 8px;
+  }
+  
+  .reaction-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  .reaction-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .like-btn:hover {
+    background-color: #e3f2fd;
+    border-color: #2196f3;
+  }
+  
+  .dislike-btn:hover {
+    background-color: #ffebee;
+    border-color: #f44336;
+  }
+  
+  .love-btn:hover {
+    background-color: #fce4ec;
+    border-color: #e91e63;
+  }
+  
+  .laugh-btn:hover {
+    background-color: #fff8e1;
+    border-color: #ffc107;
+  }
+  
+  .emoji {
+    font-size: 18px;
+    line-height: 1;
+  }
+  
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .pulse-animation {
+    animation: pulse 0.5s;
+  }
+  
+
+  .File {
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.05);
+  }
+  
+  .File:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .Texto {
+    margin: 8px 0;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .reaction-buttons {
+      width: 100%;
+    }
+    
+    .reaction-btn {
+      padding: 6px 12px;
+    }
+    
+    .emoji {
+      font-size: 16px;
+    }
+  }
