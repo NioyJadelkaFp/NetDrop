@@ -57,11 +57,11 @@ def index():
 
     if 'user_id' not in session:
         session['user_id'] = secrets.token_hex(8) 
+
     File = Show_File.Show_File()
     reactions = init_reactions()
     user_reactions = init_user_reactions()
     user_id = session['user_id']
-    
 
     for file in File:
         file_id = file['nombre']
@@ -70,7 +70,6 @@ def index():
             file['dislikes'] = reactions[file_id].get('dislikes', 0)
             file['love'] = reactions[file_id].get('love', 0)
             file['laugh'] = reactions[file_id].get('laugh', 0)
-            
 
             file['user_reacted'] = False
             file['user_reaction'] = None
@@ -85,8 +84,15 @@ def index():
             file['laugh'] = 0
             file['user_reacted'] = False
             file['user_reaction'] = None
-    
+
+        # Calcula el total de reacciones
+        file['total_reacciones'] = file['likes'] + file['dislikes'] + file['love'] + file['laugh']
+
+    # Ordenar la lista por total de reacciones (de mayor a menor)
+    File.sort(key=lambda f: f['total_reacciones'], reverse=True)
+
     return render_template('index.html', File=File)
+
 
 @app.route('/react/<string:file_name>/<string:reaction_type>', methods=['POST'])
 def react_to_file(file_name, reaction_type):
