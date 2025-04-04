@@ -1,0 +1,544 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+
+    .info-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 15px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .timer {
+        font-weight: bold;
+        color: #ff4500;
+    }
+    .coordinates {
+        color: #666;
+    }
+    .canvas-container {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        touch-action: none; /* Previene el comportamiento táctil predeterminado */
+        background: #e5e5e5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #place-canvas {
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        cursor: pointer;
+        width: 90%;
+    }
+    .color-picker {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+    .color-option {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .color-option.selected {
+        border: 3px solid black;
+        transform: scale(1.1);
+    }
+    .button {
+        background-color: #ff4500;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    .button:hover {
+        background-color: #e03d00;
+    }
+    .button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    .zoom-indicator {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        color: #333;
+    }
+    
+    /* Estilos para dispositivos móviles */
+    @media (max-width: 768px) {
+        .color-option {
+            width: 28px;
+            height: 28px;
+        }
+        .info-bar {
+            font-size: 14px;
+        }
+        h1 {
+            font-size: 20px;
+        }
+    }
+    
+    /* Estilos para dispositivos más pequeños */
+    @media (max-width: 480px) {
+        .color-option {
+            width: 22px;
+            height: 22px;
+        }
+    }
+</style>
+
+<div class="info-bar">
+    <div class="timer">Juego experimental -</div>
+    <div class="timer" id="timer">Cargando...</div>
+    <div class="coordinates" id="coordinates">Posición: -  </div>
+    <button id="resetGrid" class="button" style="display: none;">Reiniciar</button>
+</div>
+
+<div class="canvas-container" id="canvas-container">
+    <canvas id="place-canvas" width="800" height="800"></canvas>
+    <div class="zoom-indicator" id="zoom-indicator">100%</div>
+</div>
+
+<div class="color-picker">
+    <div class="color-option selected" style="background-color: #FF4500" data-color="#FF4500"></div>
+    <div class="color-option" style="background-color: #FFA800" data-color="#FFA800"></div>
+    <div class="color-option" style="background-color: #FFD635" data-color="#FFD635"></div>
+    <div class="color-option" style="background-color: #00A368" data-color="#00A368"></div>
+    <div class="color-option" style="background-color: #7EED56" data-color="#7EED56"></div>
+    <div class="color-option" style="background-color: #2450A4" data-color="#2450A4"></div>
+    <div class="color-option" style="background-color: #3690EA" data-color="#3690EA"></div>
+    <div class="color-option" style="background-color: #51E9F4" data-color="#51E9F4"></div>
+    <div class="color-option" style="background-color: #811E9F" data-color="#811E9F"></div>
+    <div class="color-option" style="background-color: #B44AC0" data-color="#B44AC0"></div>
+    <div class="color-option" style="background-color: #FF99AA" data-color="#FF99AA"></div>
+    <div class="color-option" style="background-color: #9C6926" data-color="#9C6926"></div>
+    <div class="color-option" style="background-color: #000000" data-color="#000000"></div>
+    <div class="color-option" style="background-color: #898D90" data-color="#898D90"></div>
+    <div class="color-option" style="background-color: #D4D7D9" data-color="#D4D7D9"></div>
+    <div class="color-option" style="background-color: #FFFFFF" data-color="#FFFFFF"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const canvas = document.getElementById('place-canvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('canvas-container');
+        const timerElement = document.getElementById('timer');
+        const coordinatesElement = document.getElementById('coordinates');
+        const zoomIndicator = document.getElementById('zoom-indicator');
+        const colorOptions = document.querySelectorAll('.color-option');
+        let selectedColor = '#FF4500'; // Color predeterminado
+        let placeCells = [];
+        let canPlacePixel = true;
+        let remainingTime = 0;
+        let timerInterval = null;
+        
+        // Variables para el manejo del zoom y pan
+        let scale = 1.0;
+        let offsetX = 0;
+        let offsetY = 0;
+        let isDragging = false;
+        let lastX, lastY;
+        let pixelSize = 8; // Tamaño base de cada píxel
+        
+        // Ajustar el canvas al tamaño del contenedor
+        function resizeCanvas() {
+            canvas.width = 800;
+            canvas.height = 800;
+            drawGrid();
+        }
+        
+        // Manejar el zoom con la rueda del ratón
+        container.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            // Calcular el punto en la escala actual
+            const pointX = (mouseX - offsetX) / scale;
+            const pointY = (mouseY - offsetY) / scale;
+            
+            // Aplicar el zoom
+            if (e.deltaY < 0) {
+                scale *= 1.1; // Zoom in
+            } else {
+                scale /= 1.1; // Zoom out
+            }
+            
+            // Limitar el zoom
+            scale = Math.min(Math.max(0.5, scale), 10);
+            
+            // Ajustar el offset para mantener el punto bajo el cursor
+            offsetX = mouseX - pointX * scale;
+            offsetY = mouseY - pointY * scale;
+            
+            // Actualizar el indicador de zoom
+            zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+            
+            drawGrid();
+        });
+        
+        // Manejar el arrastre para mover el canvas
+        container.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            container.style.cursor = 'grabbing';
+        });
+        
+        container.addEventListener('mouseup', function() {
+            isDragging = false;
+            container.style.cursor = 'default';
+        });
+        
+        container.addEventListener('mouseleave', function() {
+            isDragging = false;
+            container.style.cursor = 'default';
+        });
+        
+        container.addEventListener('mousemove', function(e) {
+            // Actualizar coordenadas
+            updateCoordinatesDisplay(e);
+            
+            if (!isDragging) return;
+            
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            
+            offsetX += dx;
+            offsetY += dy;
+            
+            lastX = e.clientX;
+            lastY = e.clientY;
+            
+            drawGrid();
+        });
+        
+        // Soporte para eventos táctiles
+        let initialPinchDistance = null;
+        let initialScale = null;
+        
+        container.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 1) {
+                isDragging = true;
+                lastX = e.touches[0].clientX;
+                lastY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                // Iniciar zoom con pellizco
+                initialPinchDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                initialScale = scale;
+            }
+        });
+        
+        container.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            
+            if (e.touches.length === 1 && isDragging) {
+                // Pan con un dedo
+                const dx = e.touches[0].clientX - lastX;
+                const dy = e.touches[0].clientY - lastY;
+                
+                offsetX += dx;
+                offsetY += dy;
+                
+                lastX = e.touches[0].clientX;
+                lastY = e.touches[0].clientY;
+                
+                drawGrid();
+            } else if (e.touches.length === 2) {
+                // Zoom con pellizco
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                
+                if (initialPinchDistance === null) {
+                    initialPinchDistance = currentDistance;
+                } else {
+                    const pinchRatio = currentDistance / initialPinchDistance;
+                    scale = initialScale * pinchRatio;
+                    
+                    // Limitar el zoom
+                    scale = Math.min(Math.max(0.5, scale), 10);
+                    
+                    // Actualizar el indicador de zoom
+                    zoomIndicator.textContent = `${Math.round(scale * 100)}%`;
+                    
+                    // Calcular el punto central del pellizco
+                    const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                    const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                    
+                    drawGrid();
+                }
+            }
+            
+            // Actualizar las coordenadas si hay un toque
+            if (e.touches.length > 0) {
+                updateCoordinatesDisplay({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+            }
+        });
+        
+        container.addEventListener('touchend', function() {
+            isDragging = false;
+            initialPinchDistance = null;
+            initialScale = null;
+        });
+        
+        // Actualizar las coordenadas mostradas
+        function updateCoordinatesDisplay(e) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            // Convertir las coordenadas del mouse a coordenadas de la cuadrícula
+            const gridX = Math.floor((mouseX - offsetX) / (pixelSize * scale));
+            const gridY = Math.floor((mouseY - offsetY) / (pixelSize * scale));
+            
+            if (gridX >= 0 && gridX < 100 && gridY >= 0 && gridY < 100) {
+                coordinatesElement.textContent = `Posición: (${gridX}, ${gridY})`;
+            } else {
+                coordinatesElement.textContent = 'Posición: -';
+            }
+        }
+        
+        // Verificar si el usuario puede colocar un píxel
+        function checkPlacementStatus() {
+            fetch('/get_remaining_time')
+                .then(response => response.json())
+                .then(data => {
+                    canPlacePixel = data.can_place;
+                    remainingTime = data.remaining_seconds;
+                    
+                    if (canPlacePixel) {
+                        timerElement.textContent = "Puedes colocar un píxel ahora";
+                        if (timerInterval) {
+                            clearInterval(timerInterval);
+                            timerInterval = null;
+                        }
+                    } else {
+                        updateTimerDisplay();
+                        if (!timerInterval) {
+                            timerInterval = setInterval(updateTimer, 1000);
+                        }
+                    }
+                })
+                .catch(error => console.error('Error al verificar estado:', error));
+        }
+
+        // Actualizar el contador regresivo
+        function updateTimer() {
+            remainingTime--;
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                canPlacePixel = true;
+                timerElement.textContent = "Puedes colocar un píxel ahora";
+            } else {
+                updateTimerDisplay();
+            }
+        }
+
+        // Mostrar el tiempo restante
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            timerElement.textContent = `Espera ${minutes}:${seconds < 10 ? '0' + seconds : seconds} para colocar otro píxel`;
+        }
+
+        // Cargar la cuadrícula desde el servidor
+        function loadGrid() {
+            fetch('/get_grid')
+                .then(response => response.json())
+                .then(data => {
+                    placeCells = data;
+                    drawGrid();
+                })
+                .catch(error => console.error('Error al cargar la cuadrícula:', error));
+        }
+
+        // Dibujar la cuadrícula en el canvas
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Aplicar transformaciones para zoom y pan
+            ctx.save();
+            ctx.translate(offsetX, offsetY);
+            ctx.scale(scale, scale);
+            
+            // Dibujar los píxeles
+            for (let y = 0; y < placeCells.length; y++) {
+                for (let x = 0; x < placeCells[y].length; x++) {
+                    ctx.fillStyle = placeCells[y][x];
+                    ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+                }
+            }
+            
+            // Dibujar la cuadrícula si el zoom es suficientemente alto
+            if (scale > 1.5) {
+                ctx.strokeStyle = '#e0e0e0';
+                ctx.lineWidth = 0.5 / scale; // Ajustar el grosor según el zoom
+                
+                for (let y = 0; y <= placeCells.length; y++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y * pixelSize);
+                    ctx.lineTo(100 * pixelSize, y * pixelSize);
+                    ctx.stroke();
+                }
+                
+                for (let x = 0; x <= placeCells[0].length; x++) {
+                    ctx.beginPath();
+                    ctx.moveTo(x * pixelSize, 0);
+                    ctx.lineTo(x * pixelSize, 100 * pixelSize);
+                    ctx.stroke();
+                }
+            }
+            
+            ctx.restore();
+        }
+
+        // Actualizar un píxel en el servidor
+        function updatePixel(row, col, color) {
+            if (!canPlacePixel) {
+                return;
+            }
+
+            fetch('/update_pixel', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    row: row,
+                    col: col,
+                    color: color
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    placeCells[row][col] = color;
+                    drawGrid();
+                    canPlacePixel = false;
+                    remainingTime = 300; // 5 minutos
+                    updateTimerDisplay();
+                    if (!timerInterval) {
+                        timerInterval = setInterval(updateTimer, 1000);
+                    }
+                } else {
+                    if (data.remaining_seconds) {
+                        remainingTime = data.remaining_seconds;
+                        canPlacePixel = false;
+                        updateTimerDisplay();
+                        if (!timerInterval) {
+                            timerInterval = setInterval(updateTimer, 1000);
+                        }
+                    }
+                    console.error('Error al actualizar el píxel:', data.message);
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Manejar clic en el canvas
+        canvas.addEventListener('click', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            
+            // Convertir las coordenadas del click a coordenadas de la cuadrícula
+            const gridX = Math.floor((clickX - offsetX) / (pixelSize * scale));
+            const gridY = Math.floor((clickY - offsetY) / (pixelSize * scale));
+            
+            if (gridX >= 0 && gridX < 100 && gridY >= 0 && gridY < 100) {
+                updatePixel(gridY, gridX, selectedColor);
+            }
+        });
+        
+        // Manejar toque en el canvas (para dispositivos móviles)
+        canvas.addEventListener('touchend', function(e) {
+            if (e.changedTouches.length === 1) {
+                const touch = e.changedTouches[0];
+                const rect = canvas.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                const touchY = touch.clientY - rect.top;
+                
+                // Convertir las coordenadas del toque a coordenadas de la cuadrícula
+                const gridX = Math.floor((touchX - offsetX) / (pixelSize * scale));
+                const gridY = Math.floor((touchY - offsetY) / (pixelSize * scale));
+                
+                if (gridX >= 0 && gridX < 100 && gridY >= 0 && gridY < 100) {
+                    updatePixel(gridY, gridX, selectedColor);
+                }
+            }
+        });
+
+        // Manejar selección de color
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedColor = this.getAttribute('data-color');
+            });
+        });
+
+        // Botón para reiniciar la cuadrícula
+        document.getElementById('resetGrid').addEventListener('click', function() {
+            if (confirm('¿Estás seguro de que quieres reiniciar toda la cuadrícula?')) {
+                fetch('/reset_grid', {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        loadGrid();
+                    }
+                })
+                .catch(error => console.error('Error al reiniciar:', error));
+            }
+        });
+
+        // Actualizar periódicamente la cuadrícula 
+        function scheduleGridUpdate() {
+            setTimeout(function() {
+                loadGrid();
+                scheduleGridUpdate();
+            }, 10000); // Actualizar cada 10 segundos
+        }
+
+        // Inicializar
+        resizeCanvas();
+        loadGrid();
+        checkPlacementStatus();
+        scheduleGridUpdate();
+        
+        // Verificar estado de colocación cada 30 segundos
+        setInterval(checkPlacementStatus, 30000);
+        
+        // Manejar cambios de tamaño de ventana
+        window.addEventListener('resize', resizeCanvas);
+    });
+</script>
+{% endblock %}
