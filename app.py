@@ -7,7 +7,6 @@ import secrets
 
 Files_Carpet = './static/File/'
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)
 socketio = SocketIO(app)
 
 REACTIONS_FILE = 'reactions.json'
@@ -203,6 +202,6 @@ def pagina_no_encontrada(error):
     return render_template('404.html')
 
 if __name__ == '__main__':
-    socketio.run(app,host='0.0.0.0', debug=True)
+    socketio.run(app)
     # app.run(host='0.0.0.0', debug=True)
     #,host='0.0.0.0', debug=True Stashed changes
