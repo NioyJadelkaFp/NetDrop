@@ -61,28 +61,20 @@
     align-items: center;
     flex-direction: column;
     margin-top: 5px;
-    border-radius: 4px;
-    padding: 10px;
     background-color: #ffffff;
     color: #333333;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    gap: 10px;
     border: 1px solid #000000;
-    box-shadow: 10px 10px 0px 0px black;
-}
-
-.File:hover{
-    box-shadow: 3px 3px 0px 0px black;
+    border-radius: 10px;
 }
 
 .File picture {
-    width: 90%;
+    width: 100%;
     height: 60%;
     overflow: hidden;
-    border-radius: 4px;
 }
 
 .File img{
@@ -90,7 +82,6 @@
     height: 100%;
     object-fit: contain;
 }
-
 
 .File video {
     width: 100%;
@@ -112,8 +103,8 @@
     min-width: 25%;
     font-size: medium;
     font-family: sans-serif;
-    margin-left: 20px;
-    color: #333333;
+    font-weight: 800;
+    color: #000000;
 }
 
 .File a {
@@ -124,25 +115,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
-    color: #333333;
+    background-color: #000000;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 500;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
     padding: 25px;
     text-decoration: none;
     gap: 10px;
     margin-right: 20px;
     border: 1px solid;
-    background-color: white;
-    box-shadow: 5px 5px 0px 0px black;
-}
-
-.File a:hover {
-    background-color: #ffffff;
-    box-shadow: 3px 3px 0px 0px black;
-
 }
 
 .File .Des {
@@ -164,8 +147,8 @@
     margin: 40px auto;
     padding: 30px;
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
 }
 
 /* Estilos para etiquetas */
@@ -174,7 +157,7 @@
     margin-bottom: 20px;
     font-size: 14px;
     font-weight: 500;
-    color: #555;
+    color: #000000;
 }
 
 /* Estilos para inputs de texto */
@@ -182,7 +165,7 @@ input[type="text"] {
     width: 100%;
     padding: 12px;
     margin-top: 8px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #b8b8b8;
     border-radius: 6px;
     font-size: 14px;
     box-sizing: border-box;
@@ -245,7 +228,7 @@ input:focus {
 }
 
 .Des:hover {
-    background-color: #0056b3;
+    background-color: #000000;
     transform: scale(1.05); /* Efecto de hover para agrandar ligeramente el botón */
 }
 
@@ -254,19 +237,16 @@ input:focus {
 }
 
 .Des {
-    background-color: #f5f5f5;
-    color: #333333;
-    border: 1px solid #e0e0e0;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
     padding: 10px 20px;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
     width: 100%;
 }
 
-.Des:hover {
-    background-color: #eeeeee;
-}
 
 @media screen and (max-width: 768px){
     .Container{
@@ -329,7 +309,7 @@ input:focus {
 
 .Comunicados{
     width: 90%;
-    height: 100vh;
+    height: auto;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -348,12 +328,8 @@ input:focus {
     margin-top: 20px;
     border-radius: 10px;
     background-color: white;
-    box-shadow: 10px 10px 0px 0px black;
 }
-.Comunicados-card:hover{
-    background-color: #ffffff;
-    box-shadow: 3px 3px 0px 0px black;
-}
+
 .Comunicados-info{
     display: flex;
     align-items: center;
@@ -369,14 +345,20 @@ input:focus {
     text-wrap: wrap;
 }
 
-
-
+.barra{
+    width: 90%;
+    height: 1px;
+    border-radius: 10px;
+    background-color: #000000;
+    margin: 10px auto;
+}
 
 .file-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 8px;
+    margin-bottom: 15px;
     gap: 8px;
   }
   
@@ -392,9 +374,9 @@ input:focus {
     align-items: center;
     gap: 5px;
     padding: 5px 10px;
-    border: 1px solid #e0e0e0;
+    border: none;
     border-radius: 20px;
-    background-color: #f8f8f8;
+    background-color: white;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -411,18 +393,18 @@ input:focus {
   }
   
   .dislike-btn:hover {
-    background-color: #ffebee;
-    border-color: #f44336;
+    background-color: #e3f2fd;
+    border-color: #2196f3;
   }
   
   .love-btn:hover {
-    background-color: #fce4ec;
-    border-color: #e91e63;
+    background-color: #e3f2fd;
+    border-color: #2196f3;
   }
   
   .laugh-btn:hover {
-    background-color: #fff8e1;
-    border-color: #ffc107;
+    background-color: #e3f2fd;
+    border-color: #2196f3;
   }
   
   .emoji {
@@ -447,22 +429,6 @@ input:focus {
     animation: pulse 0.5s;
   }
   
-
-  .File {
-    margin: 10px;
-    padding: 15px;
-    border: 1px solid #000000;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.05);
-  }
-  
-  .File:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  }
   
   .Texto {
     margin: 8px 0;

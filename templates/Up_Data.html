@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
 
-
-<div class="alert alert-danger" role="alert" style="width: 80%;">
-  Alerta:
-  <p><strong>No me hago cargo de nada de lo que se sube.</strong></p>
-  <p><strong>Artículo 6 de la Constitución de El Salvador:</strong></p>
-  <p>“Toda persona puede expresar y difundir libremente sus pensamientos, siempre que no subvierta el orden público ni lesione la moral, el honor o la vida privada de los demás. El ejercicio de este derecho no estará sujeto a previa censura, sino a responsabilidades ulteriores establecidas por la ley.”</p>
-</div>
-
 <form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
-    No se puede subir imágenes por el momento
+  <label for="title" class="Up">
+    Título:
+    <input type="text" name="title" id="title"  required minlength="1" maxlength="30" />
+</label>
+<label for="file" class="Up">
+    Selecciona un archivo
+    <input type="file" name="file" id="file" class="UpInput" required />
+</label>
+<input class="Des" type="submit" value="SUBIR" />
 </form>
 
 <!--

@@ -197,6 +197,6 @@ def pagina_no_encontrada(error):
     return render_template('404.html')
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,host='0.0.0.0', debug=True)
     # app.run(host='0.0.0.0', debug=True)
-    #,host='0.0.0.0', debug=TrueStashed changes
+    #,host='0.0.0.0', debug=True Stashed changes
