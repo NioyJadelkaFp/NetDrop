@@ -4,7 +4,6 @@ from flask_socketio import SocketIO
 import os
 import json
 import secrets
-import time
 
 Files_Carpet = './static/File/'
 app = Flask(__name__)
@@ -198,113 +197,6 @@ def Comunicados():
     with open('Comunicados.json', 'r') as file:
         comunicados = json.load(file)
     return render_template('Comunicados.html', comunicados=comunicados)
-
-@app.route('/rplace')
-def rplace():
-    return render_template('rplace.html')
-
-# Inicialización de la cuadrícula r/place
-def init_grid():
-    if os.path.exists('place_data.json'):
-        with open('place_data.json', 'r') as f:
-            return json.load(f)
-    else:
-        # Crear una cuadrícula 100x100 con color blanco (#FFFFFF)
-        grid = [["#FFFFFF" for _ in range(100)] for _ in range(100)]
-        with open('place_data.json', 'w') as f:
-            json.dump(grid, f)
-        return grid
-
-# Almacenamiento de tiempos para usuarios
-user_timers = {}
-
-place_grid = init_grid()
-
-@app.route('/rplace')
-def rplace_view():
-    # Asegurar que el usuario tenga un ID
-    if 'user_id' not in session:
-        session['user_id'] = secrets.token_hex(8)
-    return render_template('rplace.html')
-
-@app.route('/get_grid', methods=['GET'])
-def get_grid():
-    return jsonify(place_grid)
-
-@app.route('/get_remaining_time', methods=['GET'])
-def get_remaining_time():
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({"can_place": True, "remaining_seconds": 0})
-    
-    last_placed = user_timers.get(user_id, 0)
-    current_time = time.time()
-    elapsed = current_time - last_placed
-    
-    # Tiempo de espera: 5 minutos (300 segundos)
-    cooldown_period = 300
-    
-    if elapsed < cooldown_period:
-        remaining = cooldown_period - elapsed
-        return jsonify({"can_place": False, "remaining_seconds": int(remaining)})
-    else:
-        return jsonify({"can_place": True, "remaining_seconds": 0})
-
-@app.route('/update_pixel', methods=['POST'])
-def update_pixel():
-    data = request.get_json()
-    row = data.get('row')
-    col = data.get('col')
-    color = data.get('color')
-    
-    # Obtener ID de usuario de la sesión
-    user_id = session.get('user_id')
-    if not user_id:
-        return jsonify({"status": "error", "message": "No se pudo identificar al usuario"})
-    
-    # Verificar si ha pasado suficiente tiempo desde la última colocación
-    current_time = time.time()
-    last_placed = user_timers.get(user_id, 0)
-    elapsed = current_time - last_placed
-    
-    # Tiempo de espera: 5 minutos (300 segundos)
-    if last_placed > 0 and elapsed < 300:
-        remaining = 300 - elapsed
-        return jsonify({
-            "status": "error", 
-            "message": f"Debes esperar {int(remaining)} segundos más antes de colocar otro píxel",
-            "remaining_seconds": int(remaining)
-        })
-    
-    # Validar los datos
-    if not all(isinstance(x, int) for x in [row, col]):
-        return jsonify({"status": "error", "message": "Coordenadas inválidas"})
-    
-    if not (0 <= row < 100 and 0 <= col < 100):
-        return jsonify({"status": "error", "message": "Coordenadas fuera de rango"})
-    
-    # Actualizar el píxel
-    place_grid[row][col] = color
-    
-    # Guardar la cuadrícula actualizada
-    with open('place_data.json', 'w') as f:
-        json.dump(place_grid, f)
-    
-    # Actualizar el tiempo de la última colocación del usuario
-    user_timers[user_id] = current_time
-    
-    return jsonify({"status": "success"})
-
-@app.route('/reset_grid', methods=['POST'])
-def reset_grid():
-    global place_grid
-    place_grid = [["#FFFFFF" for _ in range(100)] for _ in range(100)]
-    
-    # Guardar la cuadrícula reseteada
-    with open('place_data.json', 'w') as f:
-        json.dump(place_grid, f)
-    
-    return jsonify({"status": "success"})
 
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
