@@ -7,6 +7,7 @@ import secrets
 
 Files_Carpet = './static/File/'
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
 socketio = SocketIO(app)
 
 REACTIONS_FILE = 'reactions.json'

@@ -36,5 +36,4 @@ Pipfile.lock
 *.envrc
 .env
 
-File/
 Qr/
