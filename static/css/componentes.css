@@ -115,6 +115,13 @@
     overflow: hidden;
 }
 
+.File audio {
+    width: 100%;    /* El audio ocupará todo el ancho del contenedor */
+    height: auto;   /* La altura se ajustará automáticamente para mantener la proporción */
+    max-width: 100%;  /* Asegurará que el audio no se desborde del contenedor */
+}
+
+
 .File video {
     width: 100%;
     height: 100%;

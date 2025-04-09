@@ -18,10 +18,13 @@
     <picture>
       <embed class="Icono_Documento" src="{{ File.ruta }}" type="application/pdf" width="150" height="200">
     </picture>
-    {% elif File.tipo in ["aac", "wav", "mp4","flac","ogg","aiff"] %}
-    <picture>
-      <audio src="{{ File.ruta }}" controls>
-    </picture>
+    {% elif File.tipo in ["aac", "wav", "mp3", "m4a"] %}
+  <div class="audio-container">
+    <audio controls>
+      <source src="{{ File.ruta }}" type="audio/{{ File.tipo }}">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </div>
     {% elif File.tipo in ["py", "js", "html", "css", "txt", "java", "jav", "exe"] %}
     <picture>
       <img src="{{ url_for('static', filename='Logo/codigo.png') }}" alt="Código">
@@ -29,7 +32,7 @@
     {% endif %}
     <span class="Texto">{{ File.nombre }}</span>
 
-    <a href="#" onclick="downloadFile('{{ File.nombre }}')">
+    <a href="#" onclick="downloadFile(event, '{{ File.nombre }}')">
         Descargar
     </a>
 
@@ -38,7 +41,7 @@
 </section>
 
 <script>
-  function downloadFile(fileName) {
+  function downloadFile(event, fileName) {
     // Evitar que la página recargue o ejecute la descarga sin que el usuario haga clic
     event.preventDefault();
     
