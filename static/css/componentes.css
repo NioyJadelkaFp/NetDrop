@@ -106,6 +106,8 @@
     font-family: sans-serif;
     font-weight: 800;
     color: #000000;
+    margin: 29px;
+    text-align: start;
 }
 
 .File a {
@@ -144,8 +146,10 @@
 
 /* Contenedor del formulario */
 .UpData {
-    max-width: 500px;
-    margin: 40px auto;
+    max-width: 90%;
+    width: 90%;
+    min-width: 450px;
+    margin: 20px;
     padding: 30px;
     background-color: white;
     border: 1px solid rgb(187, 187, 187);
@@ -214,24 +218,6 @@ input:focus {
     outline: none;
 }
 
-.Des {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 15px;
-}
-
-.Des:hover {
-    background-color: #000000;
-    transform: scale(1.05); /* Efecto de hover para agrandar ligeramente el botón */
-}
 
 .Des:focus {
     outline: none;
@@ -245,7 +231,17 @@ input:focus {
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
-    width: 100%;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 200px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px;
+
 }
 
 
@@ -357,7 +353,7 @@ input:focus {
 .file-actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 8px;
     margin-bottom: 15px;
     gap: 8px;
@@ -367,12 +363,12 @@ input:focus {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   .reaction-btn {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
     padding: 5px 10px;
     border: none;

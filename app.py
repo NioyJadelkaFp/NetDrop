@@ -190,7 +190,7 @@ def update():
         # Guardar el archivo con el nuevo nombre
         f.save(Files_Carpet + new_filename)
        
-    return redirect('/update')
+    return redirect('/')
 
 @app.route('/comunicados')
 def Comunicados():
@@ -203,5 +203,5 @@ def pagina_no_encontrada(error):
     return render_template('404.html')
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
 

@@ -1,13 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="alert alert-danger" role="alert">
-  Alerta: Todo contenido referente a algún estudiante o profesor será eliminado. También si es contenido pornográfico.
-</div>
+<form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
+  <label for="title" class="Up">
+    Título:
+    <input type="text" name="title" id="title" required minlength="1" maxlength="30"
+           pattern="[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ ]+" title="Solo letras, números y espacios" />
+</label>
+
+<label for="file" class="Up">
+  Selecciona un archivo
+  <input type="file" name="file" id="file" class="UpInput" required accept="image/*,video/*" />
+</label>
+
+<input class="Des" type="submit" value="SUBIR" />
+</form>
+
+<div class="hr_barra"></div>
+<br>
 
 <section class="List-Files" id="List-Files">
   {% for File in File %}
+  
   <div class="File">
+    <span class="Texto">{{ File.nombre }}</span>
+    <div class="barra"></div>
     {% if File.tipo in ["jpg", "jpeg", "png", "gif"] %}
     <picture>
       <img class="Icono_Documento" src="{{ File.ruta }}" alt="{{ File.nombre }}" width="150" loading="lazy" />
@@ -19,12 +36,8 @@
       </video>
     </picture>
     {% endif %}
-    <div class="barra"></div>
-    <span class="Texto">{{ File.nombre }}</span>
+
     <div class="file-actions">
-      <a href="" onclick="downloadFile('{{ File.nombre }}')">
-          Descargar
-      </a>
       <div class="reaction-buttons">
         <button class="reaction-btn like-btn" onclick="reactToFile('{{ File.nombre }}', 'likes')">👍 <span class="like-count">{{ File.likes }}</span></button>
         <button class="reaction-btn dislike-btn" onclick="reactToFile('{{ File.nombre }}', 'dislikes')">💩 <span class="dislike-count">{{ File.dislikes }}</span></button>

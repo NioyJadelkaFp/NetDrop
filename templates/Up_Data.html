@@ -1,48 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<form action="/upload" method="POST" enctype="multipart/form-data" class="UpData">
-  <label for="title" class="Up">
-    Título:
-    <input type="text" name="title" id="title"  required minlength="1" maxlength="30" />
-</label>
-<label for="file" class="Up">
-    Selecciona un archivo
-    <input type="file" name="file" id="file" class="UpInput" required />
-</label>
-<input class="Des" type="submit" value="SUBIR" />
-</form>
 
-<!--
-  <label for="title" class="Up">
-        Título:
-        <input type="text" name="title" id="title"  required minlength="1" maxlength="30" />
-    </label>
-    <label for="file" class="Up">
-        Selecciona un archivo
-        <input type="file" name="file" id="file" class="UpInput" required />
-    </label>
-    <input class="Des" type="submit" value="SUBIR" />
--->
-
-<script>
-  // Cerrar la alerta cuando se presiona el botón
-  document.getElementById("cerrar").addEventListener("click", function() {
-      document.getElementById("overlay").style.display = "none";
-  });
-</script>
-
-<script>
-    document.getElementById('uploadForm').onsubmit = function(event) {
-      var fileInput = document.getElementById('fileInput');
-      var file = fileInput.files[0];
-      var maxSize = 10 * 1024 * 1024; // 2 MB en bytes
-  
-      if (file && file.size > maxSize) {
-        alert('El archivo es demasiado grande. El tamaño máximo permitido es 2 MB.');
-        event.preventDefault(); // Detiene el envío del formulario
-      }
-    };
-  </script>
 
 {% endblock %}

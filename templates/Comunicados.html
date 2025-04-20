@@ -22,7 +22,10 @@
                     <cite>{{ comunicado.autor }}</cite>
                 </div>
                 <p>{{ comunicado.texto }}</p>
-                <time datetime="{{ comunicado.fecha }}">{{ comunicado.fecha }}</time>
+                <relative-time datetime="{{ comunicado.fecha }}" lang="es">
+                    {{ comunicado.fecha }}
+                  </relative-time>
+                  
             </div>
         {% endfor %}
     </div>

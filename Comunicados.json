@@ -2,20 +2,25 @@
     {
         "titulo": "Nueva Actualización",
         "autor": "@Nioy - Developer",
+        "texto": "Mejor formato, ajuste de la forma visual de la web y corrección de errores menores.",
+        "fecha": "2025-04-20T00:00:00Z"
+    },
+    {
+        "titulo": "Nueva Actualización",
+        "autor": "@Nioy - Developer",
         "texto": "En esta actualización, presentamos un nuevo apartado diseñado para mantener informada a nuestra comunidad sobre actualizaciones, reclamos y la incorporación de nuevos miembros a nuestro equipo de desarrollo.",
-        "fecha": "2025-04-02"
+        "fecha": "2025-04-02T00:00:00Z"
     },
     {
         "titulo": "Aviso Importante",
         "autor": "@Admin - Support",
         "texto": "Hemos implementado mejoras en la sección de publicaciones de la comunidad, así como un nuevo apartado de sugerencias para que los usuarios puedan contribuir con ideas para optimizar la plataforma.",
-        "fecha": "2025-04-05"
+        "fecha": "2025-04-05T00:00:00Z"
     },
     {
         "titulo": "Nuevo Logo de Favicon y Compartir",
         "autor": "@Admin - Support",
         "texto": "Hemos agregado un nuevo logo como favicon para la web y una imagen representativa para mostrar al compartir la web en redes sociales. Ahora, la experiencia visual es más coherente y atractiva.",
-        "fecha": "2025-04-05"
+        "fecha": "2025-04-05T00:00:00Z"
     }
-    
 ]
